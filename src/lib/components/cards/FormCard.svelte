@@ -1,5 +1,7 @@
-<div class="flex flex-wrap justify-center card flex p-6">
-	<slot />
+<div>
+	<div class="flex flex-wrap justify-center card flex p-6">
+		<slot />
+	</div>
 </div>
 
 <style>

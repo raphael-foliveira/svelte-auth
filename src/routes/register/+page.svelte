@@ -1,9 +1,8 @@
 <script lang="ts">
 	import type { ActionData } from './$types';
 	import FormCard from '$lib/components/cards/FormCard.svelte';
+	import { buttonClasses, inputClasses, labelClasses } from '$lib/tailwindStyles/constants';
 
-	const labelClasses = 'label align-baseline w-full mt-3';
-	const inputClasses = 'input w-full p-2 text-center mt-3';
 	export let form: ActionData;
 </script>
 
@@ -38,7 +37,7 @@
 			{/if}
 		</div>
 
-		<button class="btn variant-filled-primary w-100 mt-5">Submit</button>
+		<button class={buttonClasses}>Submit</button>
 	</FormCard>
 </form>
 

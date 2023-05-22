@@ -9,3 +9,18 @@ services:
       - '5432:5432'
     volumes:
       - ./postgres:/var/lib/postgresql
+
+  app:
+    build: .
+    command: npm run dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      DATABASE_URL: postgresql://postgres:postgres@database:5432/svelte_postgres
+    depends_on:
+      - database
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./src:/app/src

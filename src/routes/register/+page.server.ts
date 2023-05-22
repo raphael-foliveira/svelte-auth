@@ -1,5 +1,5 @@
 import { redirect, type Actions, fail } from '@sveltejs/kit';
-import prisma from '../../lib/prisma/prisma';
+import prisma from '$lib/prisma/prisma';
 
 export const actions: Actions = {
 	default: async ({ request, cookies }) => {
