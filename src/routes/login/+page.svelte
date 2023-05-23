@@ -1,6 +1,7 @@
 <script lang="ts">
+	import Button from '$lib/components/buttons/Button.svelte';
 	import FormCard from '$lib/components/cards/FormCard.svelte';
-	import { buttonClasses, inputClasses, labelClasses } from '$lib/tailwindStyles/constants';
+	import Input from '$lib/components/inputs/Input.svelte';
 	import type { ActionData } from '../register/$types';
 
 	export let form: ActionData;
@@ -9,19 +10,13 @@
 <form action="">
 	<FormCard>
 		<h1>Login form</h1>
-		<label class={labelClasses} for="email"
-			>Email
-			<input class={inputClasses} type="email" name="email" id="email" value={form?.email || ''} />
-		</label>
-		<label class={labelClasses} for="password"
-			>Password
-			<input class={inputClasses} type="password" name="password" id="password" />
-		</label>
+		<Input label="Email" type="email" name="email" id="email" value={form?.email || ''} />
+		<Input label="Password" type="password" name="password" id="password" />
 		<div class="w-full text-center text-red-500">
 			{#if form?.error}
 				<p>{form.error}</p>
 			{/if}
 		</div>
-		<button class={buttonClasses}>Submit</button>
+		<Button>Submit</Button>
 	</FormCard>
 </form>
