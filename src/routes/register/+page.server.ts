@@ -2,7 +2,7 @@ import { redirect, type Actions, fail } from '@sveltejs/kit';
 import prisma from '$lib/prisma/prisma';
 
 export const actions: Actions = {
-	default: async ({ request, cookies }) => {
+	default: async ({ request }) => {
 		const formData = await request.formData();
 		const email = formData.get('email') as string;
 		const username = formData.get('username') as string;
@@ -33,9 +33,6 @@ export const actions: Actions = {
 				incorrect: true
 			});
 		}
-		cookies.set('authorization', 'yes', {
-			expires: new Date(Date.now() + 1000 * 60 * 30)
-		});
-		throw redirect(303, '/');
+		throw redirect(303, '/login');
 	}
 };

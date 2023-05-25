@@ -1,21 +1,48 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import FormCard from '$lib/components/cards/FormCard.svelte';
+	import BoundInput from '$lib/components/inputs/BoundInput.svelte';
 	import Input from '$lib/components/inputs/Input.svelte';
-	import type { ActionData } from '../register/$types';
+	import { redirect } from '@sveltejs/kit';
 
-	export let form: ActionData;
+	interface LoginData {
+		email: string;
+		password: string;
+		error?: string;
+	}
+
+	let form: LoginData = {
+		email: '',
+		password: ''
+	};
+
+	const handleSubmit = async (event: SubmitEvent) => {
+		event.preventDefault();
+		const body = form;
+		await fetch('/login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(body)
+		})
+			.then((res) => res.json())
+			.then((data) => {
+				if (data?.error) {
+					form.error = data.error;
+					return;
+				}
+				goto('/');
+			});
+	};
 </script>
 
-<form action="">
+<form action="" on:submit={handleSubmit}>
 	<FormCard>
 		<h1>Login form</h1>
-		<Input label="Email" type="email" name="email" id="email" value={form?.email || ''} />
-		<Input label="Password" type="password" name="password" id="password" />
+		<BoundInput label="Email" type="email" id="email" bind:value={form.email} />
+		<BoundInput label="Password" type="password" id="password" bind:value={form.password} />
 		<div class="w-full text-center text-red-500">
-			{#if form?.error}
-				<p>{form.error}</p>
-			{/if}
+			<p>{form.error || ''}</p>
 		</div>
 		<Button>Submit</Button>
 	</FormCard>

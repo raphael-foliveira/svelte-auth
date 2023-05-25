@@ -9,9 +9,7 @@
 		<a href="/login">Login</a>
 		<a href="/register">Register</a>
 	</div>
-	<svelte:fragment slot="trail">
-		<LightSwitch />
-	</svelte:fragment>
+	<LightSwitch slot="trail" />
 </AppBar>
 
 <style>
