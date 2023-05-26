@@ -3,8 +3,6 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import FormCard from '$lib/components/cards/FormCard.svelte';
 	import BoundInput from '$lib/components/inputs/BoundInput.svelte';
-	import Input from '$lib/components/inputs/Input.svelte';
-	import { redirect } from '@sveltejs/kit';
 
 	interface LoginData {
 		email: string;
